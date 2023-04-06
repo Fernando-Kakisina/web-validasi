@@ -14,4 +14,13 @@ class Daftar_PesertaModel extends Model
     {
         return $this->find($id);
     }
+
+    public function search($keyword)
+    {
+        // $builder = $this->table('daftar_peserta');
+        // $builder->like('nama_peserta', $keyword);
+        // return $builder;
+
+        return $this->table('daftar_peserta')->like('nama_peserta', $keyword)->orLike('no_telepon', $keyword);
+    }
 }

@@ -21,13 +21,18 @@ class Peserta extends BaseController
 
         $currentPage = $this->request->getVar('page_daftar_peserta') ? $this->request->getVar('page_daftar_peserta') : 1;
 
-        d($this->request->getVar('keyword'));
+        $keyword = $this->request->getVar('keyword');
+        if ($keyword) {
+            $peserta = $this->daftar_pesertaModel->search($keyword);
+        } else {
+            $peserta = $this->daftar_pesertaModel;
+        }
 
         $data = [
             'title' => 'Daftar Peserta',
             // 'peserta' => $peserta,
-            'daftar_peserta' => $this->daftar_pesertaModel->paginate(10, 'daftar_peserta'),
-            'pager' => $this->daftar_pesertaModel->pager,
+            'daftar_peserta' => $peserta->paginate(10, 'daftar_peserta'),
+            'pager' => $peserta->pager,
             'currentPage' => $currentPage
         ];
 
