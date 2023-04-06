@@ -3,13 +3,26 @@
 <?= $this->section('content'); ?>
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-4">
             <h1 class="mt-2">Daftar Peserta</h1>
+            <form action="" method="post">
+                <?= csrf_field(); ?>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Masukkan Keyword Pencarian" name="keyword">
+                    <div>
+                        <button class="btn btn-outline-secondary" type="submit" name="submit">Cari</button>
+                    </div>
+                </div>
+            </form>
             <?php if (session()->get('pesan')) : ?>
                 <div class="alert alert-success" role="alert">
                     <?= session()->get('pesan') ?>
                 </div>
             <?php endif; ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
             <a href="/peserta/create" class="btn btn-primary mb-3">Tambah Peserta</a>
             <table class="table">
                 <thead>
@@ -22,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; ?>
+                    <?php $i = 1 + (10 * ($currentPage - 1)); ?>
                     <?php foreach ($daftar_peserta as $ps) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
@@ -41,7 +54,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <?= $pager->links() ?>
+            <?= $pager->links('daftar_peserta', 'peserta_pagination') ?>
         </div>
     </div>
 </div>

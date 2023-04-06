@@ -46,6 +46,7 @@ $routes->post('/peserta/save', 'Peserta::save');
 $routes->get('/peserta/edit/(:num)', 'Peserta::edit/$1');
 $routes->get('/peserta/edit', 'Peserta::edit');
 $routes->post('/peserta/update/(:num)', 'Peserta::update/$1');
+$routes->post('/peserta/(:any)', 'Peserta::index');
 
 // $routes->get('/peserta/delete/(:any)', 'Peserta::delete/$1');
 $routes->delete('/peserta/(:num)', 'Peserta::delete/$1');
